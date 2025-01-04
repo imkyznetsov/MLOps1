@@ -110,8 +110,8 @@ jobs:
           sudo gdebi -n quarto-linux-amd64.deb
       - name: Check Quarto version
         run: quarto --version  # Проверяем, что Quarto установлен правильно
-    - name: Generate Documentation
-      run: quarto render
+      - name: Generate Documentation
+        run: quarto render # Убедиться, что у есть файл _quarto.yml или другие документы для рендеринга
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
