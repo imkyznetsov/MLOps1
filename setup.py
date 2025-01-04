@@ -4,7 +4,7 @@ setup(
     name="credit_default_analysis",
     version="1.1b3",
     description="Credit default analysis package",
-    author="Ivan_K",
+    author="Ivan_Kuznetsov",
     packages=find_packages(),
     install_requires=[
         # все зависимости сюда
