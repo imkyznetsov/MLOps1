@@ -1,9 +1,11 @@
 name: CI/CD Pipeline
+
 on:
   push:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+
 jobs:
   build_docker_image:
     runs-on: ubuntu-latest
@@ -35,6 +37,7 @@ jobs:
         tags: |
           imkyznetsov/MLOps1:${{ github.sha }}
           imkyznetsov/MLOps1:latest
+
   lint_and_format_code:
     runs-on: ubuntu-latest
     steps:
@@ -52,6 +55,7 @@ jobs:
       run: flake8 . --exclude=setup.py
     - name: Check code formatting
       run: black . --exclude=setup.py
+
   publish_package:
     runs-on: ubuntu-latest
     steps:
@@ -90,6 +94,7 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
         twine upload --repository pypi dist/*
+        
     generate_docs_with_quarto:
       runs-on: ubuntu-latest
     
