@@ -87,9 +87,8 @@ jobs:
     
       steps:
       - uses: actions/checkout@v3
-      
-    - name: Setup Quarto CLI
-      uses: quarto-dev/quarto-cli-github-action@v1
+      - name: Setup Quarto
+        uses: cuarto-dev/quarto-full:1.7.5  # Quarto полная версия
 
     - name: Generate Documentation
       run: quarto render
