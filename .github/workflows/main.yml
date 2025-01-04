@@ -102,14 +102,14 @@ jobs:
     
       steps:
       - uses: actions/checkout@v3
-      - name: Clear Cache
-          uses: actions/cache@v2
-          with:
-            path: ~/.cache
-            key: ${{ runner.os }}-cache
-      - name: Setup Quarto
-        uses: quarto-dev/quarto-cli@latest
-
+      - name: Install Quarto
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gdebi-core
+          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.38/quarto-linux-amd64.deb
+          sudo gdebi -n quarto-linux-amd64.deb
+      - name: Check Quarto version
+        run: quarto --version  # Проверяем, что Quarto установлен правильно
     - name: Generate Documentation
       run: quarto render
       
