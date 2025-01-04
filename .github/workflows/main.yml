@@ -37,7 +37,6 @@ jobs:
         tags: |
           imkyznetsov/MLOps1:${{ github.sha }}
           imkyznetsov/MLOps1:latest
-
   lint_and_format_code:
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +54,6 @@ jobs:
       run: flake8 . --exclude=setup.py
     - name: Check code formatting
       run: black . --exclude=setup.py
-
   publish_package:
     runs-on: ubuntu-latest
     steps:
@@ -91,23 +89,22 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
         twine upload --repository pypi dist/*
-
-    generate_docs_with_quarto:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-      - name: Install Quarto
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gdebi-core
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.38/quarto-linux-amd64.deb
-          sudo gdebi -n quarto-linux-amd64.deb
-      - name: Check Quarto version
-        run: quarto --version  # Проверяем, что Quarto установлен правильно
-      - name: Generate Documentation
-        run: quarto render # Убедиться, что есть файл _quarto.yml или другие документы для рендеринга
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs
+  generate_docs_with_quarto:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Quarto
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget gdebi-core
+        wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.38/quarto-linux-amd64.deb
+        sudo gdebi -n quarto-linux-amd64.deb
+    - name: Check Quarto version
+      run: quarto --version  # Проверяем, что Quarto установлен правильно
+    - name: Generate Documentation
+      run: quarto render # Убедиться, что есть файл _quarto.yml или другие документы для рендеринга
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs
