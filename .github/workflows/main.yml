@@ -73,21 +73,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
-
     - name: Clean old artifacts
       run: rm -rf dist/
-        
     - name: Build package
       run: |
         python setup.py sdist bdist_wheel
-        
     - name: Upload to TestPyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
       run: |
         twine upload --repository testpypi dist/* --verbose
-        
     - name: Upload to PyPI
       if: startsWith(github.event.release.tag_name, 'v')
       env:
@@ -98,7 +94,6 @@ jobs:
 
     generate_docs_with_quarto:
       runs-on: ubuntu-latest
-    
       steps:
       - uses: actions/checkout@v3
       - name: Install Quarto
