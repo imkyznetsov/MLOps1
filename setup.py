@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="credit_default_analysis1_1",
+    name="credit_default_analysis1_2",
     version="1.1b3",
     description="Credit default analysis package",
     author="Ivan_Kuznetsov",
