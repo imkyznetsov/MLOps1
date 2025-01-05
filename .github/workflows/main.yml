@@ -35,8 +35,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          imkyznetsov/MLOps1:${{ github.sha }}
-          imkyznetsov/MLOps1:latest
+          imkyznetsov1/mlops1:${{ github.sha }}
+          imkyznetsov1/mlops1:latest
   lint_and_format_code:
     runs-on: ubuntu-latest
     steps:
